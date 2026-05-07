@@ -252,16 +252,17 @@ export default function Screen5Compliance() {
           )}
 
           <div className="mt-s-4">
-            <InfoCallout title="Once this job is published, its compliance set is frozen.">
-              Edits to this job apply only to new copies you spawn from it — never
-              retroactively. This protects in-flight placements from changing rules underneath
-              them.
+            <InfoCallout title="Immutability Rule.">
+              The version of each checklist attached here is snapshotted when this job
+              is published. Edits to a checklist template afterwards (for example, adding
+              an item to RN Licensure) have no effect on ongoing jobs — only on future
+              jobs that attach the updated checklist.
             </InfoCallout>
           </div>
 
           <StickyFooter
             back={{
-              label: "Back to Compensation",
+              label: "Back to previous step",
               to: "/requisitions/templates/new/compensation",
             }}
             next={{

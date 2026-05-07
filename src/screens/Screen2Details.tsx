@@ -154,7 +154,7 @@ export default function Screen2Details() {
 
           <StickyFooter
             back={{
-              label: "Back to Type",
+              label: "Back to previous step",
               to: "/requisitions/templates/new/type",
             }}
             next={{

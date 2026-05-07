@@ -235,7 +235,7 @@ export default function Screen3Schedule() {
 
           <StickyFooter
             back={{
-              label: "Back to Details",
+              label: "Back to previous step",
               to: "/requisitions/templates/new/details",
             }}
             next={{
