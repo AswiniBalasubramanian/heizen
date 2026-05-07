@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install *)",
+      "mcp__Claude_Preview__preview_start",
+      "PowerShell(Get-NetTCPConnection -LocalPort 5181 -ErrorAction SilentlyContinue | Select-Object -ExpandProperty OwningProcess | ForEach-Object { Stop-Process -Id $_ -Force -ErrorAction SilentlyContinue }; Start-Sleep -Seconds 2; Get-NetTCPConnection -LocalPort 5181 -ErrorAction SilentlyContinue)",
+      "Bash(npx tsc *)",
+      "Bash(ls -lt \"C:/Users/baswini/Downloads/\" 2>/dev/null | grep -iE \"\\(wfn|logo|nexus|hexagon|\\\\.svg|\\\\.png\\)\" | head -10)",
+      "Bash(mkdir -p \"C:/Users/baswini/OneDrive - Kaar Technologies India Pvt. Ltd.,/Documents/heizen/public\" && cp \"C:/Users/baswini/Downloads/image 1.svg\" \"C:/Users/baswini/OneDrive - Kaar Technologies India Pvt. Ltd.,/Documents/heizen/public/logo.svg\" && ls \"C:/Users/baswini/OneDrive - Kaar Technologies India Pvt. Ltd.,/Documents/heizen/public/\")",
+      "Bash(git init *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)"
+    ]
+  }
+}
