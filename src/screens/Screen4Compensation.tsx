@@ -244,14 +244,6 @@ export default function Screen4Compensation() {
             </div>
           )}
 
-          <div className="mt-s-4">
-            <InfoCallout title="Snapshot Rule.">
-              Job postings inherit this template's data at the moment of creation.
-              Editing the template later won't retroactively change positions already
-              spawned, candidates already in flight, or jobs already published.
-            </InfoCallout>
-          </div>
-
           <StickyFooter
             back={{
               label: "Back to previous step",

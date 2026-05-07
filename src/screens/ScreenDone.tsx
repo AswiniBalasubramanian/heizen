@@ -1,15 +1,70 @@
+import { useEffect } from "react";
 import { CheckCircle2, ClipboardList, ArrowRight, Copy, Eye } from "lucide-react";
 import { useNavigate } from "react-router-dom";
+import confetti from "canvas-confetti";
 import { AppShell } from "../components/AppShell";
 import { Button, Tag } from "../components/primitives";
 import { DocumentMetaBar } from "../components/annotation";
 import { useTemplate } from "../store";
 import { TYPE_OPTIONS } from "../data";
 
+/* On-system celebration palette — primary, mint, gold, coral light */
+const CELEBRATION_COLORS = ["#1E4E47", "#7FB7A5", "#D9A741", "#E07856", "#DDEFE7"];
+
+function celebrate() {
+  // Center burst
+  confetti({
+    particleCount: 80,
+    spread: 70,
+    startVelocity: 35,
+    origin: { x: 0.5, y: 0.45 },
+    colors: CELEBRATION_COLORS,
+    scalar: 0.9,
+    ticks: 220,
+  });
+  // Side cannons (offset slightly so they read as "from the headline")
+  setTimeout(() => {
+    confetti({
+      particleCount: 50,
+      angle: 60,
+      spread: 55,
+      origin: { x: 0.15, y: 0.55 },
+      colors: CELEBRATION_COLORS,
+      scalar: 0.8,
+    });
+    confetti({
+      particleCount: 50,
+      angle: 120,
+      spread: 55,
+      origin: { x: 0.85, y: 0.55 },
+      colors: CELEBRATION_COLORS,
+      scalar: 0.8,
+    });
+  }, 180);
+  // Drifty trailing burst
+  setTimeout(() => {
+    confetti({
+      particleCount: 30,
+      spread: 100,
+      startVelocity: 25,
+      origin: { x: 0.5, y: 0.4 },
+      colors: CELEBRATION_COLORS,
+      scalar: 1.1,
+      gravity: 0.6,
+      ticks: 300,
+    });
+  }, 400);
+}
+
 export default function ScreenDone() {
   const { template, reset } = useTemplate();
   const navigate = useNavigate();
   const typeMeta = TYPE_OPTIONS.find((t) => t.id === template.type);
+
+  useEffect(() => {
+    const id = window.setTimeout(celebrate, 120);
+    return () => window.clearTimeout(id);
+  }, []);
 
   return (
     <>

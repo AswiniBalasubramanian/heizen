@@ -167,7 +167,7 @@ export function AppShell({
                         )}
                       </NavLink>
                       {showChildren && (
-                        <ul className="mt-[2px] mb-1 ml-7 flex flex-col gap-[2px] border-l border-white/10 pl-3">
+                        <ul className="mt-[2px] mb-1 flex flex-col gap-[2px]">
                           {it.children!.map((c) => {
                             const childActive = c.matchPrefix
                               ? pathname.startsWith(c.matchPrefix)
@@ -176,7 +176,7 @@ export function AppShell({
                               <li key={c.id}>
                                 <NavLink
                                   to={c.to}
-                                  className={`block px-3 py-1.5 rounded-md text-[12.5px] transition-colors ${
+                                  className={`block py-1.5 pr-3 pl-[40px] rounded-lg text-[12.5px] transition-colors ${
                                     childActive
                                       ? "text-ink-on-dark font-medium bg-white/5"
                                       : "text-ink-on-dark/60 hover:text-ink-on-dark hover:bg-white/5"
