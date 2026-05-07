@@ -83,6 +83,7 @@ function Bubble({
 
 /* ------------------------------------------------------------------ *
  * StepHeader — eyebrow + title (question) + subtitle
+ * Save-as-draft lives on the eyebrow row, far right.
  * ------------------------------------------------------------------ */
 export function StepHeader({
   step,
@@ -96,11 +97,14 @@ export function StepHeader({
   const stepLabel = STEPS.find((s) => s.id === step)?.name ?? "";
   return (
     <div className="mb-s-4">
-      <div className="flex items-center gap-3 mb-3">
-        <span className="h-px w-4 bg-ink-3 opacity-50" />
-        <span className="eyebrow">
-          Step {step} of 5 · {stepLabel}
-        </span>
+      <div className="flex items-center justify-between gap-3 mb-3">
+        <div className="flex items-center gap-3 min-w-0">
+          <span className="h-px w-4 bg-ink-3 opacity-50 shrink-0" />
+          <span className="eyebrow truncate">
+            Step {step} of 5 · {stepLabel}
+          </span>
+        </div>
+        <Button variant="secondary">Save as draft</Button>
       </div>
       <h1 className="text-title font-medium text-ink mb-2">{title}</h1>
       <p className="text-body-lg text-ink-2 max-w-[560px]">{subtitle}</p>
@@ -124,18 +128,17 @@ export function StickyFooter({
   return (
     <div className="sticky bottom-0 z-[5] bg-cream -mx-s-6 px-s-6 mt-s-5 pt-s-3 pb-s-3 border-t border-line">
       <div className="flex items-center gap-s-4">
-        {back && (
-          <Button
-            variant="ghost"
-            leadingIcon={<ArrowLeft size={14} strokeWidth={2} />}
-            onClick={back.onClick ?? (() => back.to && navigate(back.to))}
-          >
-            {back.label}
-          </Button>
-        )}
         <SaveStatus savedAgo={savedAgo} isSaving={isSaving} />
         <div className="ml-auto flex items-center gap-s-3">
-          <Button variant="secondary">Save as draft</Button>
+          {back && (
+            <Button
+              variant="secondary"
+              leadingIcon={<ArrowLeft size={14} strokeWidth={2} />}
+              onClick={back.onClick ?? (() => back.to && navigate(back.to))}
+            >
+              {back.label}
+            </Button>
+          )}
           {next && (
             <Button
               trailingIcon={<ArrowRight size={14} strokeWidth={2.2} />}
