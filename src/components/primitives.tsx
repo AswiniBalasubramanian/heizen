@@ -20,7 +20,7 @@ export function Tag({
 
   return (
     <span
-      className={`inline-flex items-center font-mono text-[11px] font-medium tracking-[0.02em] px-2 py-[3px] rounded-[4px] border ${styles}`}
+      className={`inline-flex items-center font-mono text-[11px] font-medium tracking-[0.02em] px-1.5 py-[3px] rounded-[4px] border whitespace-nowrap ${styles}`}
     >
       {children}
     </span>
@@ -123,7 +123,7 @@ export function Button({
   onClick,
 }: BtnProps) {
   const base =
-    "inline-flex items-center gap-2 px-[18px] h-10 rounded-md text-[14px] font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed";
+    "inline-flex items-center gap-2 px-[18px] h-10 rounded-md text-[14px] font-medium transition-colors disabled:opacity-40 disabled:cursor-not-allowed whitespace-nowrap shrink-0";
   const variantClass =
     variant === "primary"
       ? "bg-primary text-ink-on-dark hover:bg-primary-hover"

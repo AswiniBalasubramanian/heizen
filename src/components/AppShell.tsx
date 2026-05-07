@@ -96,13 +96,15 @@ export function AppShell({
         style={{ gridArea: "sidebar" }}
         className="bg-primary text-ink-on-dark flex flex-col sticky top-0 h-screen self-start"
       >
-        <div className="px-6 pt-4 pb-6 flex items-center gap-2">
+        <div className="px-6 pt-5 pb-6 flex items-center gap-2.5">
           <img
             src="/logo.svg"
             alt="NexusForce"
-            className="h-8 w-auto"
+            className="h-7 w-auto shrink-0"
           />
-          <span className="font-medium text-[16px] tracking-tight">NexusForce</span>
+          <span className="font-medium text-[16px] tracking-tight leading-none">
+            NexusForce
+          </span>
         </div>
 
         <nav className="flex-1 px-3 flex flex-col gap-5 overflow-y-auto pb-6">
@@ -152,10 +154,10 @@ export function AppShell({
       {/* Topbar */}
       <header
         style={{ gridArea: "topbar" }}
-        className="bg-cream border-b border-line px-s-5 flex items-center justify-between sticky top-0 z-10"
+        className="bg-cream border-b border-line px-s-5 flex items-center justify-between sticky top-0 z-10 gap-3"
       >
         <Breadcrumb items={breadcrumb} />
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 shrink-0">
           <AnnotationToggle />
           <button className="inline-flex items-center gap-2 h-9 px-3 rounded-md border border-line bg-surface text-[13px] text-ink-2 hover:border-line-2 transition-colors">
             <Building2 size={14} className="text-ink-3" strokeWidth={1.8} />
@@ -182,20 +184,28 @@ export function AppShell({
 
 function Breadcrumb({ items }: { items: { label: string; to?: string }[] }) {
   return (
-    <nav aria-label="Breadcrumb" className="text-[13px]">
-      <ol className="flex items-center gap-2">
+    <nav aria-label="Breadcrumb" className="text-[13px] min-w-0 flex-1">
+      <ol className="flex items-center gap-2 min-w-0">
         {items.map((it, i) => {
           const last = i === items.length - 1;
           return (
-            <li key={i} className="flex items-center gap-2">
+            <li key={i} className="flex items-center gap-2 min-w-0 shrink-0 last:shrink last:min-w-0">
               {it.to && !last ? (
-                <NavLink to={it.to} className="text-ink-3 hover:text-ink-2">
+                <NavLink
+                  to={it.to}
+                  className="text-ink-3 hover:text-ink-2 whitespace-nowrap"
+                >
                   {it.label}
                 </NavLink>
               ) : (
-                <span className={last ? "text-ink font-medium" : "text-ink-3"}>{it.label}</span>
+                <span
+                  className={`${last ? "text-ink font-medium truncate" : "text-ink-3 whitespace-nowrap"} ${last ? "max-w-[280px]" : ""}`}
+                  title={last ? it.label : undefined}
+                >
+                  {it.label}
+                </span>
               )}
-              {!last && <span className="text-ink-4">/</span>}
+              {!last && <span className="text-ink-4 shrink-0">/</span>}
             </li>
           );
         })}

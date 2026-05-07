@@ -11,7 +11,7 @@ import { useTemplate } from "../store";
 export function Stepper({ current }: { current: number }) {
   const navigate = useNavigate();
   return (
-    <div className="sticky top-[64px] z-[5] bg-cream py-3 -mx-s-6 px-s-6">
+    <div className="sticky top-[64px] z-[5] bg-cream pt-2 pb-3 -mx-s-6 px-s-6">
       <div className="bg-surface border border-line rounded-[12px] px-s-4 py-s-3 shadow-card">
         <ol className="flex items-stretch">
         {STEPS.map((s, i) => {
@@ -152,18 +152,23 @@ export function StickyFooter({
 }
 
 function SaveStatus({ savedAgo, isSaving }: { savedAgo: number; isSaving: boolean }) {
+  const stamp =
+    savedAgo === 0
+      ? "just now"
+      : savedAgo < 60
+        ? `${savedAgo}s ago`
+        : savedAgo < 3600
+          ? `${Math.floor(savedAgo / 60)}m ago`
+          : `${Math.floor(savedAgo / 3600)}h ago`;
+
   return (
-    <span className="inline-flex items-center gap-2 text-[12px] text-ink-3">
+    <span className="inline-flex items-center gap-2 text-[12px] text-ink-3 whitespace-nowrap shrink-0">
       <span
         className={`w-[6px] h-[6px] rounded-full ${
           isSaving ? "bg-gold" : "bg-mint"
         } ${isSaving ? "animate-pulse" : ""}`}
       />
-      {isSaving
-        ? "Saving…"
-        : savedAgo === 0
-          ? "Auto-saved · just now"
-          : `Auto-saved · ${savedAgo} sec ago`}
+      {isSaving ? "Saving…" : `Auto-saved · ${stamp}`}
     </span>
   );
 }
