@@ -215,7 +215,7 @@ export const DEFAULT_TEMPLATE: Template = {
  * Saved templates — populates the Requisitions list view
  * ------------------------------------------------------------------ */
 
-export type TemplateStatus = "live" | "draft" | "paused" | "pending-approval";
+export type TemplateStatus = "draft" | "active" | "scheduled";
 
 export interface SavedTemplate {
   id: string;
@@ -249,7 +249,7 @@ export const SAVED_TEMPLATES: SavedTemplate[] = [
     location: "Mercy Hospital — Downtown",
     department: "Critical Care",
     specialty: "Intensive Care (ICU)",
-    status: "live",
+    status: "active",
     expiresInDays: 18,
     starred: true,
     positions: { active: 6, total: 8 },
@@ -272,7 +272,7 @@ export const SAVED_TEMPLATES: SavedTemplate[] = [
     location: "Mercy Hospital — North Campus",
     department: "Medical-Surgical",
     specialty: "Med-Surg",
-    status: "live",
+    status: "active",
     expiresInDays: 7,
     starred: false,
     positions: { active: 12, total: 15 },
@@ -295,7 +295,7 @@ export const SAVED_TEMPLATES: SavedTemplate[] = [
     location: "Mercy Surgery Center — West",
     department: "Surgical Services",
     specialty: "Cardiothoracic",
-    status: "pending-approval",
+    status: "scheduled",
     expiresInDays: null,
     starred: false,
     positions: { active: 0, total: 3 },
@@ -318,7 +318,7 @@ export const SAVED_TEMPLATES: SavedTemplate[] = [
     location: "Mercy Health — Multi-site",
     department: "Emergency Services",
     specialty: "Emergency Department",
-    status: "live",
+    status: "active",
     expiresInDays: 2,
     starred: true,
     positions: { active: 4, total: 6 },
@@ -341,7 +341,7 @@ export const SAVED_TEMPLATES: SavedTemplate[] = [
     location: "Mercy Children's — Riverside",
     department: "Neonatal",
     specialty: "NICU",
-    status: "live",
+    status: "active",
     expiresInDays: 42,
     starred: false,
     positions: { active: 2, total: 4 },

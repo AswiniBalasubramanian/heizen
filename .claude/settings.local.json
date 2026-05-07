@@ -9,7 +9,9 @@
       "Bash(mkdir -p \"C:/Users/baswini/OneDrive - Kaar Technologies India Pvt. Ltd.,/Documents/heizen/public\" && cp \"C:/Users/baswini/Downloads/image 1.svg\" \"C:/Users/baswini/OneDrive - Kaar Technologies India Pvt. Ltd.,/Documents/heizen/public/logo.svg\" && ls \"C:/Users/baswini/OneDrive - Kaar Technologies India Pvt. Ltd.,/Documents/heizen/public/\")",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit -m ' *)"
+      "Bash(git commit -m ' *)",
+      "Bash(git remote *)",
+      "Bash(git push *)"
     ]
   }
 }

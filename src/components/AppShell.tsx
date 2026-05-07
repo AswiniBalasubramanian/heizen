@@ -17,7 +17,28 @@ import type { ReactNode } from "react";
 import { Avatar, IconButton } from "./primitives";
 import { AnnotationToggle } from "./annotation";
 
-const NAV_GROUPS = [
+/**
+ * Module access for the current user.
+ * Rule: "no-access" modules must be entirely absent from the navigation —
+ * not greyed out, not hidden behind a tooltip, not present at all.
+ *
+ * The signed-in demo user (Aswini, Hiring Manager) has no access to
+ * Invoicing or Settings — so those rows never render.
+ */
+type AccessLevel = "full" | "read-only" | "no-access";
+
+const CURRENT_USER_ACCESS: Record<string, AccessLevel> = {
+  dashboard: "full",
+  requisitions: "full",
+  candidates: "full",
+  placements: "full",
+  timekeeping: "full",
+  invoicing: "no-access",
+  reports: "read-only",
+  settings: "no-access",
+};
+
+const NAV_GROUPS_RAW = [
   {
     label: "Workspace",
     items: [
@@ -42,6 +63,16 @@ const NAV_GROUPS = [
     ],
   },
 ];
+
+// Filter no-access items out of nav groups. Drop empty groups entirely.
+const NAV_GROUPS = NAV_GROUPS_RAW
+  .map((group) => ({
+    ...group,
+    items: group.items.filter(
+      (it) => (CURRENT_USER_ACCESS[it.id] ?? "no-access") !== "no-access"
+    ),
+  }))
+  .filter((group) => group.items.length > 0);
 
 export function AppShell({
   breadcrumb,

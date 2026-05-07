@@ -37,27 +37,24 @@ const TYPE_ICON = {
 } as const;
 
 const STATUS_LABEL: Record<TemplateStatus, string> = {
-  live: "Live",
   draft: "Draft",
-  paused: "Paused",
-  "pending-approval": "Pending approval",
+  active: "Active",
+  scheduled: "Scheduled",
 };
 
 const STATUS_STYLE: Record<TemplateStatus, string> = {
-  live: "bg-mint-light text-primary",
   draft: "bg-surface-muted text-ink-3 border border-line",
-  paused: "bg-coral-light text-[#993C1D]",
-  "pending-approval": "bg-[#FAEEDA] text-[#854F0B]",
+  active: "bg-mint-light text-primary",
+  scheduled: "bg-[#FAEEDA] text-[#854F0B]",
 };
 
-type Tab = "all" | "live" | "pending-approval" | "draft" | "paused";
+type Tab = "all" | "draft" | "active" | "scheduled";
 
 const TABS: { id: Tab; label: string }[] = [
   { id: "all", label: "All" },
-  { id: "live", label: "Live" },
-  { id: "pending-approval", label: "Pending approval" },
+  { id: "active", label: "Active" },
+  { id: "scheduled", label: "Scheduled" },
   { id: "draft", label: "Drafts" },
-  { id: "paused", label: "Paused" },
 ];
 
 export default function ScreenRequisitionsList() {

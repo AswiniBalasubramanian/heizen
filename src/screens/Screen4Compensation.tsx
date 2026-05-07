@@ -20,7 +20,7 @@ const ANNOTATIONS: AnnotationEntry[] = [
   {
     number: 1,
     title: "Bill rate is what the org pays",
-    body: "This is the all-in hourly rate billed to the organisation. Vendor margin and per-vendor pay rates are calculated downstream and are never displayed in this portal — visibility is enforced at the data layer, not by hiding fields with color.",
+    body: "Bill Rate is the all-in hourly rate billed to the organisation. Vendor Rate (Bill Rate × Hours − Fees) is computed downstream and is never shown to clients in this portal. Visibility is enforced at the data layer, not by hiding fields with color.",
     pin: { top: "10px", right: "10px" },
   },
   {
