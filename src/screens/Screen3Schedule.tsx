@@ -239,7 +239,7 @@ export default function Screen3Schedule() {
               to: "/requisitions/templates/new/details",
             }}
             next={{
-              label: "Continue to Compensation",
+              label: "Continue",
               to: "/requisitions/templates/new/compensation",
               disabled: template.shifts.length === 0,
             }}

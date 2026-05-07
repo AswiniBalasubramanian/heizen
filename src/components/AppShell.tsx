@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import {
   LayoutDashboard,
   ClipboardList,
@@ -38,7 +38,16 @@ const CURRENT_USER_ACCESS: Record<string, AccessLevel> = {
   settings: "no-access",
 };
 
-const NAV_GROUPS_RAW = [
+type NavChild = { id: string; label: string; to: string; matchPrefix?: string };
+type NavItem = {
+  id: string;
+  label: string;
+  icon: typeof LayoutDashboard;
+  to: string;
+  children?: NavChild[];
+};
+
+const NAV_GROUPS_RAW: { label: string; items: NavItem[] }[] = [
   {
     label: "Workspace",
     items: [
@@ -48,6 +57,14 @@ const NAV_GROUPS_RAW = [
         label: "Requisitions",
         icon: ClipboardList,
         to: "/requisitions/templates",
+        children: [
+          {
+            id: "new-job-template",
+            label: "New job template",
+            to: "/requisitions/templates/new/type",
+            matchPrefix: "/requisitions/templates/new",
+          },
+        ],
       },
       { id: "candidates", label: "Candidates", icon: Users, to: "/candidates" },
       { id: "placements", label: "Placements", icon: Star, to: "/placements" },
@@ -81,6 +98,8 @@ export function AppShell({
   breadcrumb: { label: string; to?: string }[];
   children: ReactNode;
 }) {
+  const location = useLocation();
+  const pathname = location.pathname;
   return (
     <div
       className="grid bg-cream"
@@ -114,30 +133,65 @@ export function AppShell({
                 {group.label}
               </div>
               <ul className="flex flex-col gap-[2px]">
-                {group.items.map((it) => (
-                  <li key={it.id}>
-                    <NavLink
-                      to={it.to}
-                      className={({ isActive }) =>
-                        `relative flex items-center gap-3 px-3 py-[9px] rounded-lg text-[13.5px] transition-colors ${
-                          isActive
-                            ? "bg-white/10 text-ink-on-dark font-medium"
-                            : "text-ink-on-dark/75 hover:text-ink-on-dark hover:bg-white/5"
-                        }`
-                      }
-                    >
-                      {({ isActive }) => (
-                        <>
-                          {isActive && (
-                            <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded-r bg-mint" />
-                          )}
-                          <it.icon size={16} strokeWidth={1.8} />
-                          {it.label}
-                        </>
+                {group.items.map((it) => {
+                  const sectionActive =
+                    pathname === it.to ||
+                    pathname.startsWith(it.to + "/") ||
+                    !!it.children?.some((c) =>
+                      c.matchPrefix
+                        ? pathname.startsWith(c.matchPrefix)
+                        : pathname === c.to
+                    );
+                  const showChildren = it.children && sectionActive;
+                  return (
+                    <li key={it.id}>
+                      <NavLink
+                        to={it.to}
+                        end={!it.children}
+                        className={({ isActive }) =>
+                          `relative flex items-center gap-3 px-3 py-[9px] rounded-lg text-[13.5px] transition-colors ${
+                            isActive || sectionActive
+                              ? "bg-white/10 text-ink-on-dark font-medium"
+                              : "text-ink-on-dark/75 hover:text-ink-on-dark hover:bg-white/5"
+                          }`
+                        }
+                      >
+                        {({ isActive }) => (
+                          <>
+                            {(isActive || sectionActive) && (
+                              <span className="absolute left-0 top-1 bottom-1 w-[3px] rounded-r bg-mint" />
+                            )}
+                            <it.icon size={16} strokeWidth={1.8} />
+                            {it.label}
+                          </>
+                        )}
+                      </NavLink>
+                      {showChildren && (
+                        <ul className="mt-[2px] mb-1 ml-7 flex flex-col gap-[2px] border-l border-white/10 pl-3">
+                          {it.children!.map((c) => {
+                            const childActive = c.matchPrefix
+                              ? pathname.startsWith(c.matchPrefix)
+                              : pathname === c.to;
+                            return (
+                              <li key={c.id}>
+                                <NavLink
+                                  to={c.to}
+                                  className={`block px-3 py-1.5 rounded-md text-[12.5px] transition-colors ${
+                                    childActive
+                                      ? "text-ink-on-dark font-medium bg-white/5"
+                                      : "text-ink-on-dark/60 hover:text-ink-on-dark hover:bg-white/5"
+                                  }`}
+                                >
+                                  {c.label}
+                                </NavLink>
+                              </li>
+                            );
+                          })}
+                        </ul>
                       )}
-                    </NavLink>
-                  </li>
-                ))}
+                    </li>
+                  );
+                })}
               </ul>
             </div>
           ))}

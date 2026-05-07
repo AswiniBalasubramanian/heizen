@@ -258,7 +258,7 @@ export default function Screen4Compensation() {
               to: "/requisitions/templates/new/schedule",
             }}
             next={{
-              label: "Continue to Compliance",
+              label: "Continue",
               to: "/requisitions/templates/new/compliance",
               disabled: !isInternalFlex && template.billRate <= 0,
             }}

@@ -125,7 +125,7 @@ export default function Screen1Type() {
           <StickyFooter
             back={{ label: "Back to jobs" }}
             next={{
-              label: "Continue to Details",
+              label: "Continue",
               to: "/requisitions/templates/new/details",
             }}
           />

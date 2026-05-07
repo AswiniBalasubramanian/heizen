@@ -158,7 +158,7 @@ export default function Screen2Details() {
               to: "/requisitions/templates/new/type",
             }}
             next={{
-              label: "Continue to Shift & schedule",
+              label: "Continue",
               to: "/requisitions/templates/new/schedule",
               disabled:
                 !template.name ||

@@ -4,6 +4,7 @@ import type { ReactNode } from "react";
 import { STEPS } from "../data";
 import { Button } from "./primitives";
 import { useTemplate } from "../store";
+import { useToast } from "../toast";
 
 /* ------------------------------------------------------------------ *
  * Stepper — horizontal, clickable
@@ -95,6 +96,18 @@ export function StepHeader({
   subtitle: string;
 }) {
   const stepLabel = STEPS.find((s) => s.id === step)?.name ?? "";
+  const { template } = useTemplate();
+  const { toast } = useToast();
+
+  const handleSaveDraft = () => {
+    toast("Draft saved.", {
+      detail: template.name
+        ? `"${template.name}" is in your drafts.`
+        : "You'll find it under Drafts on the Requisitions list.",
+      variant: "success",
+    });
+  };
+
   return (
     <div className="mb-s-4">
       <div className="flex items-center justify-between gap-3 mb-3">
@@ -104,7 +117,9 @@ export function StepHeader({
             Step {step} of 5 · {stepLabel}
           </span>
         </div>
-        <Button variant="secondary">Save as draft</Button>
+        <Button variant="secondary" onClick={handleSaveDraft}>
+          Save as draft
+        </Button>
       </div>
       <h1 className="text-title font-medium text-ink mb-2">{title}</h1>
       <p className="text-body-lg text-ink-2 max-w-[560px]">{subtitle}</p>
