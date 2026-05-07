@@ -175,11 +175,11 @@ export function AppShell({
                             return (
                               <li key={c.id} className="relative">
                                 {childActive && (
-                                  <span className="absolute -left-3 top-0 bottom-0 w-[2px] bg-mint" />
+                                  <span className="absolute left-0 top-0 bottom-0 w-[2px] bg-mint" />
                                 )}
                                 <NavLink
                                   to={c.to}
-                                  className={`block py-2 -mx-3 pl-[52px] pr-3 text-[12.5px] transition-colors ${
+                                  className={`block py-2 -mr-3 pl-[40px] pr-3 text-[12.5px] transition-colors ${
                                     childActive
                                       ? "text-ink-on-dark font-medium bg-white/[0.06]"
                                       : "text-ink-on-dark/55 hover:text-ink-on-dark hover:bg-white/[0.03]"
